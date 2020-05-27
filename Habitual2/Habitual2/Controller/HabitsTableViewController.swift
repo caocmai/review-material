@@ -34,6 +34,42 @@ class HabitsTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+         let selectedHabit = persistence.habits[indexPath.row]
+         let habitDetailVC = HabitDetailedViewController.instantiate()
+         habitDetailVC.detailHabit = selectedHabit
+         habitDetailVC.habitIndex = indexPath.row
+         navigationController?.pushViewController(habitDetailVC, animated: true)
+    }
+    
+    // TO delete
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      switch editingStyle {
+        case .delete:
+        let habitToDelete = persistence.habits[indexPath.row]
+        let habitIndexToDelete = indexPath.row
+        
+        let deleteAlert = UIAlertController(habitTitle: habitToDelete.title) {
+        self.persistence.delete(habitIndexToDelete)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+
+        self.present(deleteAlert, animated: true)
+
+          // handling the delete action
+
+       default:
+          break
+       }
+    }
+    
+    // To swap habits
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+      persistence.swapHabits(habitIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
+    }
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -59,11 +95,29 @@ extension HabitsTableViewController {
         title = "Habitual"
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pressAddHabit(_:)))
         navigationItem.rightBarButtonItem = addButton
+        navigationItem.leftBarButtonItem = self.editButtonItem
+
     }
 
     @objc func pressAddHabit(_ sender: UIBarButtonItem) {
-        habits.insert(Habit(title: "Adding something new", image: Habit.Images.clock), at: 0)
-        let topIndexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [topIndexPath], with: .automatic)
+        let addHabitVC = AddHabitViewController.instantiate()
+        let navigationController = UINavigationController(rootViewController: addHabitVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
+    }
+}
+
+// To delete
+extension UIAlertController {
+    convenience init(habitTitle: String, comfirmHandler: @escaping () -> Void) {
+        self.init(title: "Delete Habit", message: "Are you sure you want to delete \(habitTitle)?", preferredStyle: .actionSheet)
+
+        let confirmAction = UIAlertAction(title: "Confirm", style: .destructive) { _ in
+            comfirmHandler()
+        }
+        self.addAction(confirmAction)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        self.addAction(cancelAction)
     }
 }

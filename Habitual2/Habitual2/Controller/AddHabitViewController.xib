@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddHabitViewController" customModule="Habitual2" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="yi0-nN-ULl" id="xIo-dC-QOB"/>
+                <outlet property="pickPhotoButtonPressed" destination="CWc-mN-HFv" id="q28-v9-geW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yi0-nN-ULl">
+                    <rect key="frame" x="10" y="117" width="394" height="672"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yMR-Mg-kSj">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Kxj-EY-Uue"/>
+                        <outlet property="delegate" destination="-1" id="ccb-tr-XDK"/>
+                    </connections>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CWc-mN-HFv">
+                    <rect key="frame" x="15" y="792" width="384" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="HHx-Sz-N7b"/>
+                    </constraints>
+                    <state key="normal" title="Pick Photo"/>
+                    <connections>
+                        <action selector="pickPhotoButtonPressed:" destination="-1" eventType="touchUpInside" id="T7D-bO-98v"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="CWc-mN-HFv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="JlN-Yk-Zju"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yi0-nN-ULl" secondAttribute="trailing" constant="10" id="SUs-3A-pBK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="CWc-mN-HFv" secondAttribute="bottom" constant="20" id="bNC-f5-nug"/>
+                <constraint firstItem="yi0-nN-ULl" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.75" id="jCi-sp-7fw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CWc-mN-HFv" secondAttribute="trailing" constant="15" id="jcM-zF-vpu"/>
+                <constraint firstItem="CWc-mN-HFv" firstAttribute="top" secondItem="yi0-nN-ULl" secondAttribute="bottom" constant="3" id="p0M-Nu-umw"/>
+                <constraint firstItem="yi0-nN-ULl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="zvI-ab-LAE"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="153"/>
+        </view>
+    </objects>
+</document>
